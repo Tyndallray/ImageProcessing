@@ -1,6 +1,7 @@
 package imageutils;
 
 import imagesettings.ImageProcessSetting;
+import org.opencv.highgui.HighGui;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -42,10 +43,21 @@ public class ImageDirectoryProcessor {
     }
 
     public void process() {
+        System.out.println("===== Deleting old images =====");
         this.deleteAllProcessed();
-        this.convertToGrayscale();
-        this.calculateBlurFactor();
 
+//        System.out.println("===== Converting to grayscale =====");
+//        this.convertToGrayscale();
+
+//        System.out.println("===== Calculating blur factor =====");
+//        this.calculateBlurFactor();
+
+//        System.out.println("===== Contour detection =====");
+//        this.getDocument();
+
+        this.adjustBrightnessAndContrast();
+
+        System.out.println("===== Saving report =====");
         this.saveReport();
     }
 
@@ -53,10 +65,18 @@ public class ImageDirectoryProcessor {
         images.forEach(Image::saveGrayscale);
     }
 
-
     private void calculateBlurFactor() {
         images.forEach(x -> x.calculateBlurFactor(setting.getBlurThreshold()));
     }
+
+    private void adjustBrightnessAndContrast() {
+        images.forEach(x -> x.adjustBrightnessAndContrast(1, 0, "Original"));
+        images.forEach(x -> x.adjustBrightnessAndContrast(2, -150, "Contrast 1"));
+        images.forEach(x -> x.adjustBrightnessAndContrast(3, -350, "Contrast 2"));
+//        HighGui.waitKey();
+    }
+
+    private void getDocument() { images.forEach(x -> x.getDocument(setting.getBlurSize(), setting.getLowThreshold(), setting.getRatio()));}
 
     public void saveReport() {
         try {
