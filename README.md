@@ -24,7 +24,16 @@ this.blurFactor = Math.pow(std.get(0,0)[0],2);
 The project is designed to take input from `./resources/` directory, output filtered images to `./processed-resources` directory and output reports to `./report` directory.
 
 ## Settings
-In addition to image blur detection, the project provides a range of customization options that allow us to adjust blur threshold and other parameters for `ImageDirectoryProcessor` class. [Click here](https://github.com/Tyndallray/ImageProcessing/blob/master/src/imageprocessing/MainApplication.java) to see an example
+In addition to image blur detection, the project provides a range of customization options that allow us to adjust blur threshold and other parameters for `ImageDirectoryProcessor` class.
+```
+ImageProcessSetting setting = new ImageProcessSetting();
+setting.setBlurThreshold(150);
+setting.setBlurSize(new Size(3, 3));
+setting.setLowThreshold(100);
+setting.setRatio(2);
+setting.setBrightnessControl(-350);
+setting.setContrastControl(3);
+```
 
 # Conclusion
 Overall, this project for filtering out blurred images is a powerful tool that can help users easily access filtered images and view reports of images that did not meet the criteria.
